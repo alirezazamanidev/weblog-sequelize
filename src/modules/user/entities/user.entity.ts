@@ -15,7 +15,7 @@ import { EntityNames } from 'src/common/enums/entityName.enum';
 
 @Table({
   tableName: EntityNames.User,
-
+  timestamps: true,
 })
 export class UserEntity extends Model {
   @PrimaryKey
@@ -41,21 +41,21 @@ export class UserEntity extends Model {
   @Unique
   @AllowNull(false)
   @Column({
-    type:DataType.STRING
+    type: DataType.STRING,
   })
+  email: string;
 
   @Column({
     type: DataType.BOOLEAN,
     defaultValue: false,
   })
-  verify_email: boolean;
+   verify_email: boolean;
 
-  @Column({
+   @Column({
     type: DataType.BOOLEAN,
     defaultValue: false,
   })
-  verify_phone: boolean;
-
+   verify_phone: boolean;
   @CreatedAt
   declare created_at: Date;
 
