@@ -1,6 +1,6 @@
 services:
-  mysql_db:
-    container_name: mysql_db
+  mysql_db_weblog:
+    container_name: mysql_db_weblog
     image: mysql:9.2.0
     restart: 'no'
     env_file: ./.env
@@ -9,22 +9,22 @@ services:
       - MYSQL_DATABASE=${DB_NAME}
     
     volumes:
-      - divarData:/var/lib/mysql
+      - weblogData:/var/lib/mysql
     ports:
       - ${DB_PORT}:3306
    
   phpmyadmin:
-    container_name: phpmyadmin
+    container_name: phpmyadmin_weblog
     image: phpmyadmin/phpmyadmin
     restart: 'no'
     env_file: ./.env
     environment:
-      - PMA_HOST=mysql_db
+      - PMA_HOST=mysql_db_weblog
       - PMA_PORT=3306
     ports:
       - 8080:80
     depends_on:
-      - mysql_db
+      - mysql_db_weblog
 
   redis:
     container_name: redis_db_weblog
